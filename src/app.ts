@@ -1,7 +1,7 @@
 // Project Type
 enum ProjectStatus {
   Active,
-  Finished
+  Finished,
 }
 
 class Project {
@@ -75,27 +75,27 @@ function validate(validatableInput: Validatable) {
   }
   if (
     validatableInput.minLength != null &&
-    typeof validatableInput.value === 'string'
+    typeof validatableInput.value === "string"
   ) {
     isValid =
       isValid && validatableInput.value.length >= validatableInput.minLength;
   }
   if (
     validatableInput.maxLength != null &&
-    typeof validatableInput.value === 'string'
+    typeof validatableInput.value === "string"
   ) {
     isValid =
       isValid && validatableInput.value.length <= validatableInput.maxLength;
   }
   if (
     validatableInput.min != null &&
-    typeof validatableInput.value === 'number'
+    typeof validatableInput.value === "number"
   ) {
     isValid = isValid && validatableInput.value >= validatableInput.min;
   }
   if (
     validatableInput.max != null &&
-    typeof validatableInput.value === 'number'
+    typeof validatableInput.value === "number"
   ) {
     isValid = isValid && validatableInput.value <= validatableInput.max;
   }
@@ -110,7 +110,7 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
     get() {
       const boundFn = originalMethod.bind(this);
       return boundFn;
-    }
+    },
   };
   return adjDescriptor;
 }
@@ -146,7 +146,7 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
 
   private attach(insertAtBeginning: boolean) {
     this.hostElement.insertAdjacentElement(
-      insertAtBeginning ? 'afterbegin' : 'beforeend',
+      insertAtBeginning ? "afterbegin" : "beforeend",
       this.element
     );
   }
@@ -159,8 +159,8 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
 class ProjectList extends Component<HTMLDivElement, HTMLElement> {
   assignedProjects: Project[];
 
-  constructor(private type: 'active' | 'finished') {
-    super('project-list', 'app', false, `${type}-projects`);
+  constructor(private type: "active" | "finished") {
+    super("project-list", "app", false, `${type}-projects`);
     this.assignedProjects = [];
 
     this.configure();
@@ -169,8 +169,8 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
 
   configure() {
     projectState.addListener((projects: Project[]) => {
-      const relevantProjects = projects.filter(prj => {
-        if (this.type === 'active') {
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
           return prj.status === ProjectStatus.Active;
         }
         return prj.status === ProjectStatus.Finished;
@@ -182,18 +182,18 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
 
   renderContent() {
     const listId = `${this.type}-projects-list`;
-    this.element.querySelector('ul')!.id = listId;
-    this.element.querySelector('h2')!.textContent =
-      this.type.toUpperCase() + ' PROJECTS';
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent =
+      this.type.toUpperCase() + " PROJECTS";
   }
 
   private renderProjects() {
     const listEl = document.getElementById(
       `${this.type}-projects-list`
     )! as HTMLUListElement;
-    listEl.innerHTML = '';
+    listEl.innerHTML = "";
     for (const prjItem of this.assignedProjects) {
-      const listItem = document.createElement('li');
+      const listItem = document.createElement("li");
       listItem.textContent = prjItem.title;
       listEl.appendChild(listItem);
     }
@@ -207,21 +207,21 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   peopleInputElement: HTMLInputElement;
 
   constructor() {
-    super('project-input', 'app', true, 'user-input');
+    super("project-input", "app", true, "user-input");
     this.titleInputElement = this.element.querySelector(
-      '#title'
+      "#title"
     ) as HTMLInputElement;
     this.descriptionInputElement = this.element.querySelector(
-      '#description'
+      "#description"
     ) as HTMLInputElement;
     this.peopleInputElement = this.element.querySelector(
-      '#people'
+      "#people"
     ) as HTMLInputElement;
     this.configure();
   }
 
   configure() {
-    this.element.addEventListener('submit', this.submitHandler);
+    this.element.addEventListener("submit", this.submitHandler);
   }
 
   renderContent() {}
@@ -233,18 +233,18 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
 
     const titleValidatable: Validatable = {
       value: enteredTitle,
-      required: true
+      required: true,
     };
     const descriptionValidatable: Validatable = {
       value: enteredDescription,
       required: true,
-      minLength: 5
+      minLength: 5,
     };
     const peopleValidatable: Validatable = {
       value: +enteredPeople,
       required: true,
       min: 1,
-      max: 5
+      max: 5,
     };
 
     if (
@@ -252,7 +252,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       !validate(descriptionValidatable) ||
       !validate(peopleValidatable)
     ) {
-      alert('Invalid input, please try again!');
+      alert("Invalid input, please try again!");
       return;
     } else {
       return [enteredTitle, enteredDescription, +enteredPeople];
@@ -260,9 +260,9 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   }
 
   private clearInputs() {
-    this.titleInputElement.value = '';
-    this.descriptionInputElement.value = '';
-    this.peopleInputElement.value = '';
+    this.titleInputElement.value = "";
+    this.descriptionInputElement.value = "";
+    this.peopleInputElement.value = "";
   }
 
   @autobind
@@ -276,7 +276,20 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     }
   }
 }
-
+class TitleHeader {
+  constructor() {
+    const div = document.getElementById("app") as HTMLDivElement;
+    const title = document.createElement("h1");
+    title.id = "title";
+    title.textContent = "Drag and Drop";
+    div.appendChild(title);
+    div.insertAdjacentElement(
+     "beforebegin",
+     title
+    );
+  }
+}
+const titleHeader = new TitleHeader();
 const prjInput = new ProjectInput();
-const activePrjList = new ProjectList('active');
-const finishedPrjList = new ProjectList('finished');
+const activePrjList = new ProjectList("active");
+const finishedPrjList = new ProjectList("finished");

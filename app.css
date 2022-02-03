@@ -20,7 +20,15 @@ textarea {
 label {
   font-weight: bold;
 }
-
+h1#title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  background: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+}
 input,
 textarea {
   font: inherit;
@@ -40,7 +48,7 @@ button {
   font: inherit;
   background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
   /* border: 1px solid linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); */
-  border:none;
+  border: none;
   cursor: pointer;
   color: white;
   padding: 0.75rem 1rem;
