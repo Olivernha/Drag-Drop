@@ -20,15 +20,7 @@ textarea {
 label {
   font-weight: bold;
 }
-h1#title {
-  font-size: 3.5rem;
-  font-weight: bold;
-  background: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-align: center;
-}
+
 input,
 textarea {
   font: inherit;
@@ -46,9 +38,8 @@ textarea:focus {
 
 button {
   font: inherit;
-  background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-  /* border: 1px solid linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); */
-  border: none;
+  background: #ff0062;
+  border: 1px solid #ff0062;
   cursor: pointer;
   color: white;
   padding: 0.75rem 1rem;
@@ -66,11 +57,11 @@ button:active {
 
 .projects {
   margin: 1rem;
-  border: 1px solid linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  border: 1px solid #ff0062;
 }
 
 .projects header {
-  background: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  background: #ff0062;
   height: 3.5rem;
   display: flex;
   justify-content: center;
@@ -78,23 +69,11 @@ button:active {
 }
 
 #finished-projects {
-  border-color: linear-gradient(
-    to right,
-    #f78ca0 0%,
-    #f9748f 19%,
-    #fd868c 60%,
-    #fe9a8b 100%
-  );
+  border-color: #0044ff;
 }
 
 #finished-projects header {
-  background: linear-gradient(
-    to right,
-    #f78ca0 0%,
-    #f9748f 19%,
-    #fd868c 60%,
-    #fe9a8b 100%
-  );
+  background: #0044ff;
 }
 
 .projects h2 {
