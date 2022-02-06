@@ -1,4 +1,4 @@
-namespace App {
+
   export enum ProjectStatus {
     Active,
     Finished,
@@ -13,5 +13,5 @@ namespace App {
       public status: ProjectStatus
     ) {}
   }
-}
+
 // Project Type
